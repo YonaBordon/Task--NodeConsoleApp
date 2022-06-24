@@ -1,6 +1,8 @@
+const { Menu } = require('./helpers/messages');
+
 console.clear();
 
 const main = async () => {
-  console.log('hi');
+  Menu();
 };
 main();
