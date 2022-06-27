@@ -1,12 +1,12 @@
-const { showMenu, pause } = require('./helpers/messages');
+const { inqMenu, inqPause } = require('./helpers/inquirerMenu');
 
 console.clear();
 
 const main = async () => {
   do {
-    option = await showMenu();
+    option = await inqMenu();
     console.log({ option });
-    await pause();
+    if (option !== '0') await inqPause();
   } while (option !== '0');
 };
 main();
