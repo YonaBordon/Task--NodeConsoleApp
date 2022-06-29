@@ -4,6 +4,7 @@ const questions = [
   {
     type: 'list',
     name: 'option',
+    message: 'Que desea hacer?',
     choices: [
       {
         value: '1',

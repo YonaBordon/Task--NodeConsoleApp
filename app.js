@@ -10,7 +10,6 @@ const main = async () => {
 
   do {
     option = await inqMenu();
-    console.log({ option });
 
     switch (option) {
       case '1':
@@ -18,7 +17,7 @@ const main = async () => {
         tasks.newTask(desc);
         break;
       case '2':
-        console.log(tasks._list);
+        console.log(tasks.arrayToList);
         break;
       case '3':
         break;
