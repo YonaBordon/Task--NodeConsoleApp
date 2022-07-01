@@ -1,4 +1,5 @@
 const { inqMenu, inqPause, readInput } = require('./helpers/inquirerMenu');
+const { saveDB, readDB } = require('./helpers/saveFile');
 const { Task } = require('./models/task');
 const Tasks = require('./models/Tasks');
 
@@ -6,7 +7,14 @@ console.clear();
 
 const main = async () => {
   let option = '';
+
   const tasks = new Tasks();
+  const tasksDB = readDB();
+  if (tasksDB) {
+    tasks.uploadFromArray(tasksDB);
+    console.log(tasks);
+  }
+  await inqPause();
 
   do {
     option = await inqMenu();
@@ -17,7 +25,7 @@ const main = async () => {
         tasks.newTask(desc);
         break;
       case '2':
-        console.log(tasks.arrayToList);
+        tasks.completeList();
         break;
       case '3':
         break;
@@ -28,6 +36,7 @@ const main = async () => {
       case '6':
         break;
     }
+    saveDB(tasks.listToArray);
     if (option !== '0') await inqPause();
   } while (option !== '0');
 };

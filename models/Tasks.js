@@ -16,6 +16,22 @@ class Tasks {
     return list;
   }
 
+  completeList() {
+    this.listToArray.forEach((task, i) => {
+      console.log(
+        `${i + 1}. ${task.desc} :: ${
+          task.completedIn ? 'Completa' : 'Pendiente'
+        }`,
+      );
+    });
+  }
+
+  uploadFromArray(tasks = []) {
+    tasks.forEach((task) => {
+      this._list[task.id] = task;
+    });
+  }
+
   newTask(desc = '') {
     const task = new Task(desc);
     this._list[task.id] = task;
