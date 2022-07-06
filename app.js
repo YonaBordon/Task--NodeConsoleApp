@@ -28,8 +28,10 @@ const main = async () => {
         tasks.completeList();
         break;
       case '3':
+        tasks.taskComplete();
         break;
       case '4':
+        tasks.taskComplete(false);
         break;
       case '5':
         break;
