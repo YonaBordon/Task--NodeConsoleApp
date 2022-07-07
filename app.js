@@ -19,9 +19,7 @@ const main = async () => {
   const tasksDB = readDB();
   if (tasksDB) {
     tasks.uploadFromArray(tasksDB);
-    console.log(tasks);
   }
-  await inqPause();
 
   do {
     option = await inqMenu();
@@ -42,17 +40,15 @@ const main = async () => {
         break;
       case '5':
         const ids = await showCheckList(tasks.listToArray);
-        console.log(ids);
         tasks.toggleComplete(ids);
         break;
       case '6':
         const id = await deleteTaskList(tasks.listToArray);
         if (id !== '0') {
-          console.log(id);
           const ok = await confirm('Esta seguro?');
           if (ok) {
             tasks.deleteTask(id);
-            console.log(`Tarea borrada correctamente`);
+            console.log(`Tarea borrada correctamente`.bgGreen.black);
           }
         }
 

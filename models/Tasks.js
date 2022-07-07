@@ -22,9 +22,10 @@ class Tasks {
 
   completeList() {
     this.listToArray.forEach((task, i) => {
+      const ic = `${i + 1}`.green;
       console.log(
-        `${i + 1}. ${task.desc} :: ${
-          task.completedIn ? 'Completa' : 'Pendiente'
+        `${ic}. ${task.desc} :: ${
+          task.completedIn ? 'Completa'.green : 'Pendiente'.yellow
         }`,
       );
     });
@@ -39,8 +40,8 @@ class Tasks {
           index += 1;
           console.log(
             `${index}. ${task.desc} :: ${
-              task.completedIn ? 'Completa' : 'Pendiente'
-            } :: ${task.completedIn} `,
+              task.completedIn ? 'Completa'.green : 'Pendiente'.yellow
+            } :: ${task.completedIn.green} `,
           );
         }
       } else {
@@ -48,7 +49,7 @@ class Tasks {
           index += 1;
           console.log(
             `${index}. ${task.desc} :: ${
-              task.completedIn ? 'Completa' : 'Pendiente'
+              task.completedIn ? 'Completa'.green : 'Pendiente'.yellow
             }`,
           );
         }

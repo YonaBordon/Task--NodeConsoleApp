@@ -1,5 +1,6 @@
 const inquirer = require('inquirer');
 const { Task } = require('../models/task');
+require('colors');
 
 const questions = [
   {
@@ -9,31 +10,31 @@ const questions = [
     choices: [
       {
         value: '1',
-        name: `1. Crear tarea`,
+        name: `${'1.'.green} Crear tarea`,
       },
       {
         value: '2',
-        name: `2. Listar tareas`,
+        name: `${'2.'.green} Listar tareas`,
       },
       {
         value: '3',
-        name: `3. Listar tareas completadas`,
+        name: `${'3.'.green} Listar tareas completadas`,
       },
       {
         value: '4',
-        name: `4. Listar tareas pendientes`,
+        name: `${'4.'.green} Listar tareas pendientes`,
       },
       {
         value: '5',
-        name: `5. Completar tareas`,
+        name: `${'5.'.green} Completar tareas`,
       },
       {
         value: '6',
-        name: `6. Borrar tarea`,
+        name: `${'6.'.green} Borrar tarea`,
       },
       {
         value: '0',
-        name: `0. Salir\n`,
+        name: `${'0.'.green} Salir\n`,
       },
     ],
   },
@@ -42,9 +43,9 @@ const questions = [
 const inqMenu = async () => {
   console.clear();
 
-  console.log('=======================');
+  console.log('======================='.green);
   console.log(' Selecciona una opcion');
-  console.log('=======================\n');
+  console.log('=======================\n'.green);
 
   const { option } = await inquirer.prompt(questions);
 
@@ -81,15 +82,16 @@ const readInput = async (message) => {
 
 const deleteTaskList = async (tasks = []) => {
   const choices = tasks.map((task, i) => {
+    const ic = `${i + 1}`.green;
     return {
       value: task.id,
-      name: `${i + 1}. ${task.desc}`,
+      name: `${ic}. ${task.desc}`,
     };
   });
 
   choices.unshift({
     value: '0',
-    name: `0. Cancelar`,
+    name: `${'0.'.green} Cancelar`,
   });
 
   const tasksQuestions = [
@@ -118,9 +120,10 @@ const confirm = async (message) => {
 
 const showCheckList = async (tasks = []) => {
   const choices = tasks.map((task, i) => {
+    const ic = `${i + 1}.`.green;
     return {
       value: task.id,
-      name: `${i + 1} ${task.desc}`,
+      name: `${ic} ${task.desc}`,
       checked: task.completedIn ? true : false,
     };
   });
