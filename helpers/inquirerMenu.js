@@ -1,4 +1,5 @@
 const inquirer = require('inquirer');
+const { Task } = require('../models/task');
 
 const questions = [
   {
@@ -78,8 +79,70 @@ const readInput = async (message) => {
   return desc;
 };
 
+const deleteTaskList = async (tasks = []) => {
+  const choices = tasks.map((task, i) => {
+    return {
+      value: task.id,
+      name: `${i + 1}. ${task.desc}`,
+    };
+  });
+
+  choices.unshift({
+    value: '0',
+    name: `0. Cancelar`,
+  });
+
+  const tasksQuestions = [
+    {
+      type: 'list',
+      name: 'id',
+      message: 'Borrar',
+      choices,
+    },
+  ];
+  const { id } = await inquirer.prompt(tasksQuestions);
+  return id;
+};
+
+const confirm = async (message) => {
+  const confirmQuestion = [
+    {
+      type: 'confirm',
+      name: 'ok',
+      message,
+    },
+  ];
+  const { ok } = await inquirer.prompt(confirmQuestion);
+  return ok;
+};
+
+const showCheckList = async (tasks = []) => {
+  const choices = tasks.map((task, i) => {
+    return {
+      value: task.id,
+      name: `${i + 1} ${task.desc}`,
+      checked: task.completedIn ? true : false,
+    };
+  });
+
+  const checkQuestion = [
+    {
+      type: 'checkbox',
+      name: 'ids',
+      message: 'selecciones',
+      choices,
+    },
+  ];
+
+  const { ids } = await inquirer.prompt(checkQuestion);
+  return ids;
+};
+
 module.exports = {
+  confirm,
+  deleteTaskList,
   inqMenu,
   inqPause,
   readInput,
+  showCheckList,
 };

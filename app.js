@@ -1,4 +1,11 @@
-const { inqMenu, inqPause, readInput } = require('./helpers/inquirerMenu');
+const {
+  inqMenu,
+  inqPause,
+  readInput,
+  deleteTaskList,
+  confirm,
+  showCheckList,
+} = require('./helpers/inquirerMenu');
 const { saveDB, readDB } = require('./helpers/saveFile');
 const { Task } = require('./models/task');
 const Tasks = require('./models/Tasks');
@@ -34,8 +41,21 @@ const main = async () => {
         tasks.taskComplete(false);
         break;
       case '5':
+        const ids = await showCheckList(tasks.listToArray);
+        console.log(ids);
+        tasks.toggleComplete(ids);
         break;
       case '6':
+        const id = await deleteTaskList(tasks.listToArray);
+        if (id !== '0') {
+          console.log(id);
+          const ok = await confirm('Esta seguro?');
+          if (ok) {
+            tasks.deleteTask(id);
+            console.log(`Tarea borrada correctamente`);
+          }
+        }
+
         break;
     }
     saveDB(tasks.listToArray);
